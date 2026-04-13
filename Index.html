@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Deepali Birthday 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  overflow:hidden;
+  font-family:Arial;
+  color:white;
+}
+
+/* VIDEO */
+video{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+/* DARK */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  z-index:-1;
+}
+
+/* GIFT */
+#gift{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:120px;
+  transition:1s;
+}
+
+/* TEXT */
+#message{
+  position:absolute;
+  top:10px;
+  left:-100%;
+  width:45%;
+  background:rgba(0,0,0,0.6);
+  padding:10px;
+  border-radius:10px;
+  font-size:13px;
+  transition:1s;
+}
+
+/* PHOTO */
+#photo{
+  position:absolute;
+  top:10px;
+  right:-150%;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:3px solid white;
+  object-fit:cover;
+  transition:1s;
+}
+</style>
+</head>
+
+<body>
+
+<video id="bgVideo" autoplay muted loop>
+  <source src="video.mp4">
+</video>
+
+<div class="overlay"></div>
+
+<img src="gift.png" id="gift">
+
+<div id="message">
+🎉 Happy Birthday Miss Deepali 🎉<br><br>
+
+Aaj ka din sirf aapka hai...<br>
+aap hamesha khush rahein...<br><br>
+
+Aap strong hain aur har situation handle kar lengi.<br><br>
+
+Bas smile karti rahiye 😊<br><br>
+
+Happy Birthday once again 🎂
+</div>
+
+<img src="deepali.jpg" id="photo">
+
+<script>
+const video = document.getElementById("bgVideo");
+
+document.body.addEventListener("click", ()=>{
+  video.muted = false;
+  video.play();
+});
+
+let done = false;
+
+video.addEventListener("timeupdate", ()=>{
+
+  if(video.currentTime >= 16 && !done){
+    done = true;
+
+    const gift = document.getElementById("gift");
+
+    gift.style.transform = "translate(-50%,-50%) scale(1.3)";
+
+    setTimeout(()=>{
+      document.getElementById("message").style.left = "10px";
+      document.getElementById("photo").style.right = "10px";
+      gift.style.transform = "translate(-50%,-50%) scale(0.5)";
+    },1500);
+  }
+
+});
+</script>
+
+</body>
+</html>
