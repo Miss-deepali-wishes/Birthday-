@@ -8,113 +8,122 @@
 <style>
 body {
   margin: 0;
-  background: black;
-  font-family: sans-serif;
   overflow: hidden;
+  font-family: sans-serif;
+  background: black;
 }
 
-/* VIDEO (BOTTOM) */
+/* ===== VIDEO ===== */
 video {
   position: fixed;
-  width: 100%;
-  height: 75%;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75%; /* छोटा किया */
   object-fit: cover;
 }
 
-/* GIFT */
-#gift {
-  position: absolute;
-  width: 120px;
-  left: 50%;
-  top: 55%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 1s;
-}
-
-/* TEXT (TOP LEFT) */
-#text {
+/* ===== TEXT ===== */
+#wish {
   position: absolute;
   top: 20px;
   left: 15px;
-  color: #ff4dff;
-  font-size: 18px;
-  font-weight: bold;
-  max-width: 60%;
-  opacity: 0;
-  text-shadow: 0 0 10px black;
+  color: #ff4fd8;
+  font-size: 15px;
+  line-height: 1.4;
+  max-width: 55%;
+  display: none;
 }
 
-/* PHOTO (TOP RIGHT) */
+/* ===== IMAGE ===== */
 #photo {
   position: absolute;
   top: 20px;
   right: 15px;
-  width: 130px;
-  border-radius: 15px;
-  opacity: 0;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  width: 120px;
+  border-radius: 12px;
+  display: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
+
+/* ===== GIFT ===== */
+#gift {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  display: none;
+  transition: 0.5s;
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- VIDEO -->
-<video id="bgVideo" autoplay muted>
+<video id="video" autoplay muted>
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- MUSIC -->
-<audio id="music" src="song.m4a"></audio>
-
-<!-- GIFT -->
-<img src="gift.png" id="gift">
+<!-- AUDIO -->
+<audio id="song" loop>
+  <source src="song2.m4a" type="audio/mp4">
+</audio>
 
 <!-- TEXT -->
-<div id="text">
-Happy Birthday Miss Deepali 🎉<br><br>
-Aaj ka din sirf aapka hai...<br><br>
-Aap hamesha khush rahein, safe rahein ❤️<br><br>
-Kabhi kabhi life simple nahi hoti,<br>
-par aap strong hain 💫<br><br>
-Ye meri taraf se last wish hai…
+<div id="wish">
+  <b>Happy Birthday Miss Deepali 🎉</b><br><br>
+
+  Aaj ka din sirf aapka hai… bas itna kehna hai ki aap hamesha khush rahein, safe rahein aur life me jo chahein wo sab mile.<br><br>
+
+  Life hamesha simple nahi hoti… par aap strong hain, aur mujhe pura yakeen hai ki aap har situation ko smile ke saath handle kar lengi.<br><br>
+
+  Aapki smile hi aapki sabse badi strength hai… ise kabhi khona mat 😊<br><br>
+
+  Bas apna khayal rakhiye… aur waise hi hasti rahiye jaise ab hasti hain.<br><br>
+
+  Ye meri taraf se aapke liye last wish hai… par dil se nikli hai ❤️<br><br>
+
+  Happy Birthday once again 🎂
 </div>
 
-<!-- PHOTO -->
-<img src="deepali.jpg" id="photo">
+<!-- IMAGE -->
+<img id="photo" src="deepali.jpg">
+
+<!-- GIFT -->
+<img id="gift" src="gift.png">
 
 <script>
-const video = document.getElementById("bgVideo");
-const gift = document.getElementById("gift");
-const text = document.getElementById("text");
-const photo = document.getElementById("photo");
-const music = document.getElementById("music");
 
-// 🔊 music start on tap (mobile rule)
+let video = document.getElementById("video");
+let gift = document.getElementById("gift");
+let text = document.getElementById("wish");
+let photo = document.getElementById("photo");
+let song = document.getElementById("song");
+
+/* ===== SONG FIX (mobile autoplay issue) ===== */
 document.body.addEventListener("click", () => {
-  music.play();
-}, { once: true });
+  song.play();
+});
 
-// 🎁 16 sec event
+/* ===== 16 sec EVENT ===== */
 video.addEventListener("timeupdate", () => {
   if (video.currentTime >= 16) {
 
-    // gift show
-    gift.style.transform = "translate(-50%, -50%) scale(1)";
+    gift.style.display = "block";
 
     setTimeout(() => {
+      text.style.display = "block";
+      photo.style.display = "block";
 
-      // gift remove
-      gift.style.display = "none";
+      gift.style.display = "none"; // gift hide
 
-      // show text + photo
-      text.style.opacity = 1;
-      photo.style.opacity = 1;
-
-    }, 1500);
+    }, 1000);
   }
 });
+
 </script>
 
 </body>
