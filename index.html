@@ -8,48 +8,52 @@
 <style>
 body {
   margin: 0;
-  overflow: hidden;
   background: black;
   font-family: sans-serif;
+  overflow: hidden;
 }
 
-/* VIDEO */
+/* VIDEO (BOTTOM) */
 video {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 75%;
+  bottom: 0;
   object-fit: cover;
 }
 
-/* GIFT BOX */
+/* GIFT */
 #gift {
   position: absolute;
   width: 120px;
   left: 50%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%) scale(0);
   transition: 1s;
 }
 
-/* TEXT */
+/* TEXT (TOP LEFT) */
 #text {
   position: absolute;
   top: 20px;
-  left: 20px;
-  color: white;
+  left: 15px;
+  color: #ff4dff;
   font-size: 18px;
+  font-weight: bold;
   max-width: 60%;
   opacity: 0;
+  text-shadow: 0 0 10px black;
 }
 
-/* PHOTO */
+/* PHOTO (TOP RIGHT) */
 #photo {
   position: absolute;
   top: 20px;
-  right: 20px;
-  width: 120px;
-  border-radius: 10px;
+  right: 15px;
+  width: 130px;
+  border-radius: 15px;
   opacity: 0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 </style>
 </head>
@@ -61,6 +65,9 @@ video {
   <source src="video.mp4" type="video/mp4">
 </video>
 
+<!-- MUSIC -->
+<audio id="music" src="song.m4a"></audio>
+
 <!-- GIFT -->
 <img src="gift.png" id="gift">
 
@@ -69,6 +76,8 @@ video {
 Happy Birthday Miss Deepali 🎉<br><br>
 Aaj ka din sirf aapka hai...<br><br>
 Aap hamesha khush rahein, safe rahein ❤️<br><br>
+Kabhi kabhi life simple nahi hoti,<br>
+par aap strong hain 💫<br><br>
 Ye meri taraf se last wish hai…
 </div>
 
@@ -80,21 +89,27 @@ const video = document.getElementById("bgVideo");
 const gift = document.getElementById("gift");
 const text = document.getElementById("text");
 const photo = document.getElementById("photo");
+const music = document.getElementById("music");
 
-// 🎯 16 SECOND PE ACTION
+// 🔊 music start on tap (mobile rule)
+document.body.addEventListener("click", () => {
+  music.play();
+}, { once: true });
+
+// 🎁 16 sec event
 video.addEventListener("timeupdate", () => {
   if (video.currentTime >= 16) {
 
-    // Gift show
+    // gift show
     gift.style.transform = "translate(-50%, -50%) scale(1)";
 
     setTimeout(() => {
-      gift.style.transform = "translate(-50%, -50%) scale(0)";
 
-      // Text show (top left)
+      // gift remove
+      gift.style.display = "none";
+
+      // show text + photo
       text.style.opacity = 1;
-
-      // Photo show (top right)
       photo.style.opacity = 1;
 
     }, 1500);
